@@ -1,19 +1,17 @@
 const fs = require('fs');
 
-module.exports = function countStudents(path)
-{
-  return new Promise((resolve, reject) =>
-    {
+module.exports = function countStudents(path) {
+  return new Promise((resolve, reject) => {
     fs.readFile(path, { encoding: 'utf-8' }, (err, data) => {
       if (err) return reject(Error('Cannot load the database'));
       // split data and taking only list without header
       const lines = data.split('\n').slice(1, -1);
-      // giving the header of data
+      // give the header of data
       const header = data.split('\n').slice(0, 1)[0].split(',');
-      // finding firstname and field index
+      // find firstname and field index
       const idxFn = header.findIndex((ele) => ele === 'firstname');
       const idxFd = header.findIndex((ele) => ele === 'field');
-      // declaring two dictionaries for count each fields and store list of students
+      // declarate two dictionaries for count each fields and store list of students
       const fields = {};
       const students = {};
 
